@@ -1,39 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:rapidpack/widgets/packages.dart';
 
 class MyAppBar extends StatelessWidget {
-  const MyAppBar({super.key});
+
+  final String title;
+
+  const MyAppBar({
+    super.key,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          body: SafeArea(
-        child: Column(
-          children: [
-            // Barra personalizada
-            Container(
-              color: Colors.red,
-              padding: const EdgeInsets.all(16.0),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'RapidPack',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                  Icon(Icons.settings, color: Colors.white),
-                ],
-              ),
+    return Container(
+      color: Colors.red,
+      padding: const EdgeInsets.all(16.0),
+      height: 70.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(5),
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 0,
             ),
-            // Contenido del cuerpo
-            const Expanded(
-              child: Packages(),
+            onPressed: () {
+              print('Botón Mi Perfil presionado');
+            },
+            child: const Row(
+              children: [
+                Icon(Icons.supervised_user_circle_outlined, color: Colors.white),
+                SizedBox(width: 5),
+                Text('Mi Perfil', style: TextStyle(color: Colors.white)),
+              ],
             ),
-          ],
-        ),
-      )),
-      debugShowCheckedModeBanner: false,
+          )
+
+        ],
+      ),
     );
   }
 }

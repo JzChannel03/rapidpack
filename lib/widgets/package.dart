@@ -1,35 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'ui/custom_column.dart';
-
-class Packages extends StatelessWidget {
-  const Packages({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: CustomColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          gap: 16,
-          children: [
-            Package(),
-            Package(),
-            Package(),
-            Package(),
-            Package(),
-            Package(),
-            Package(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Package extends StatelessWidget {
-  const Package({
+class PackageContainer extends StatelessWidget {
+  const PackageContainer({
     super.key,
   });
 
@@ -37,12 +9,11 @@ class Package extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              bottomRight: Radius.circular(15),
-            ),
-            border: Border.all(
-                color: Colors.black, width: 2, style: BorderStyle.solid)),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(15),
+          ),
+        ),
 
         // Esto hará que el Container ocupe el 100% del ancho disponible
 
@@ -60,7 +31,6 @@ class PackageDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           const Center(

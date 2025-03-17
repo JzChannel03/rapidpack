@@ -13,30 +13,29 @@ class MyHome extends StatelessWidget {
         children: [
           Container(
             decoration: const BoxDecoration(color: Colors.blueAccent),
-            child: Center(
+            child: const Center(
               child: Column(
                 children: [
-                  TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Ingrese su nombre',
-                      // Etiqueta dentro del campo
-                      border: OutlineInputBorder(), // Borde alrededor del campo
-                    ),
-                    onChanged: (value) {
-                      print('Texto ingresado: $value');
-                    },
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text("Powered by ParcelsApp")
+                  // TextField(
+                  //   decoration: const InputDecoration(
+                  //     labelText: 'Ingrese su nombre',
+                  //     // Etiqueta dentro del campo
+                  //     border: OutlineInputBorder(), // Borde alrededor del campo
+                  //   ),
+                  //   onChanged: (value) {
+                  //   },
+                  // ),
+                  // const SizedBox(
+                  //   height: 5,
+                  // ),
+                  // const Text("Powered by ParcelsApp")
                 ],
               ),
             ),
           ),
-          SizedBox(
-            height: 25,
-          ),
+          // const SizedBox(
+          //   height: 25,
+          // ),
           const Expanded(child: PackageList())
         ],
       ),

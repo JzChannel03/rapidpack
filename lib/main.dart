@@ -11,22 +11,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
           body: SafeArea(
-        child: Column(
-          children: [
-            // Barra personalizada
-            MyAppBar(
-              title: "RapidPack",
-            ),
-            // Contenido del cuerpo
-            Expanded(
-              child: Row(
-                children: [MySideBar(), MyHome()],
+        child: Container(
+          color: Colors.red,
+          child: Column(
+            children: [
+              // Barra personalizada
+              const MyAppBar(
+                title: "RapidPack",
               ),
-            ),
-          ],
+              // Contenido del cuerpo
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)) 
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: const Row(
+                    children: [
+                      MyHome(),
+                      SizedBox(
+                        width: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       )),
       debugShowCheckedModeBanner: false,
@@ -42,13 +57,41 @@ class MySideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 60,
-      padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 10),
+      width: 220,
+      height: 60,
       decoration: const BoxDecoration(
-        color: Colors.white54,
-      ),
-      child: Column(
-        children: [Icon(Icons.home_max)],
+          color: Colors.red,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 3),
+            ),
+          ]),
+      padding: const EdgeInsets.all(6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.home_max),
+            color: Colors.white,
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.access_time_outlined),
+              color: Colors.white),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.home_max),
+              color: Colors.white),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.person_2_outlined),
+              color: Colors.white),
+        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rapidpack/main.dart';
 
 class MyAppBar extends StatelessWidget {
-
   final String title;
 
   const MyAppBar({
@@ -14,33 +14,39 @@ class MyAppBar extends StatelessWidget {
     return Container(
       color: Colors.red,
       padding: const EdgeInsets.all(16.0),
-      height: 70.0,
+      height: 150.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Image.asset(
+              'assets/images/rapidpack.jpg',
+            ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.all(5),
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              elevation: 0,
-            ),
-            onPressed: () {
-              print('Botón Mi Perfil presionado');
-            },
-            child: const Row(
-              children: [
-                Icon(Icons.supervised_user_circle_outlined, color: Colors.white),
-                SizedBox(width: 5),
-                Text('Mi Perfil', style: TextStyle(color: Colors.white)),
-              ],
-            ),
-          )
+          // Text(
+          //   title,
+          //   style: const TextStyle(color: Colors.white, fontSize: 30),
+          // ),
+          // ElevatedButton(
+          //   style: ElevatedButton.styleFrom(
+          //     padding: const EdgeInsets.all(5),
+          //     backgroundColor: Colors.transparent,
+          //     shadowColor: Colors.transparent,
+          //     elevation: 0,
+          //   ),
+          //   onPressed: () {
+          //   },
+          //   child: const Row(
+          //     children: [
+          //       Icon(Icons.supervised_user_circle_outlined, color: Colors.white),
+          //       SizedBox(width: 5),
+          //       Text('Mi Perfil', style: TextStyle(color: Colors.white)),
+          //     ],
+          //   ),
+          // )
 
+          const MySideBar(),
         ],
       ),
     );

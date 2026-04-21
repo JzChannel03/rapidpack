@@ -7,21 +7,27 @@
 - [x] Modelo de datos `PackageModel` + JSON mock + `PackageService`
 - [x] `PulsingWidget` genérico en `core/widgets/`
 - [x] Splash screen — fondo rojo, logo centrado, carga en background, logo sale disparado, header fade in + body slide up
+- [x] Onboarding de accesibilidad — primera vez: modo simple/completo + diestro/zurdo, guardado en `shared_preferences`
 
 ---
 
 ## Próximo a implementar
 
-### Onboarding de accesibilidad (primera vez — via shared_preferences)
-- [ ] Al entrar por primera vez, mostrar pantalla de preferencias antes del home:
-  - **Pregunta 1:** ¿Modo simple o completo?
-  - **Pregunta 2:** ¿Eres zurdo o diestro? (para posicionar elementos del lado de la mano dominante)
-- [ ] Guardar preferencias en `shared_preferences` y no volver a mostrar en siguientes aperturas
+### Onboarding — modo por defecto según edad (pendiente de conversación)
+- [ ] Evaluar si preguntar la edad en el onboarding o inferirla
+- [ ] Usuarios mayores de 50 años podrían tener **modo simple seleccionado por defecto** como sugerencia, dejando libertad de cambiarlo
+- [ ] Analizar cómo hacerlo sin resultar condescendiente en el UX
+
+### Onboarding — usar preferencias guardadas
+- [ ] Leer `AppMode` y `Handedness` desde `PreferencesService` en `PackagesScreen`
+- [ ] Aplicar modo simple o completo según preferencia
+- [ ] Posicionar botones flotantes según mano dominante (modo completo)
 
 ### Modo simple
-- [ ] Dos botones de texto encima del listado, en línea horizontal: **"Todos"** y **"Listos para retirar"**
-- [ ] Diseño pendiente de sketch del usuario — orientado a personas con poca experiencia en apps
+- [ ] Dos tabs encima del listado: **"Todos"** y **"Disponibles para retirar"** — filtran la misma lista
+- [ ] "Disponibles para retirar" = paquetes en estado `contenedorSucursal` o `enCamino`
 - [ ] Sin filtros complejos ni elementos adicionales
+- [ ] Orientado a personas con poca experiencia en apps (ej. adultos mayores)
 
 ### Modo completo
 - [ ] Botones flotantes del lado de la mano dominante del usuario para filtrar y ordenar:
@@ -57,6 +63,26 @@
   - Tiempo en sistema (ej. "12 días, 4 horas en sistema")
   - Foto del paquete *(baja prioridad — depende de RapidPack)*
 - [ ] Botón "Subir Factura" en el detalle
+
+### Píldora de precio — indicador de cálculo
+- [ ] Mostrar ícono junto al precio que indique que el monto es resultado de precio por libra × peso
+- [ ] Definir diseño (ícono de calculadora, multiplicación, o tooltip)
+
+### Anuncios informativos — pendiente de análisis
+- [ ] Teorías a evaluar, definir cuál usar o combinar:
+  - **Teoría A — banner entre header y listado:** sección discreta y no molesta justo debajo del header, siempre visible pero sin interrumpir el flujo
+  - **Teoría B — durante la carga:** aprovechar el splash o el tiempo de carga para mostrar anuncios antes de que aparezcan los paquetes
+  - **Teoría C — panel deslizable:** el listado baja y queda visible un área de anuncios debajo (estilo drawer o scroll reveal)
+  - **Teoría D — pantalla de anuncio prioritario:** si hay un anuncio importante, ocupa el espacio de los paquetes al entrar; al aceptar o cerrar, los paquetes aparecen
+- [ ] Definir tipos de anuncio: informativos generales vs. alertas importantes
+- [ ] Definir origen de los anuncios: hardcodeados, JSON mock, o futura API
+- [ ] Analizar UX: cuándo mostrar, frecuencia, si se puede volver a ver
+- [ ] El cliente siempre incluye anuncios en sus apps — confirmar formato y contenido típico con él
+
+### Costos adicionales (pendiente de conversación con cliente)
+- [ ] Algunos paquetes pueden tener costos adicionales: seguro, impuestos, otros
+- [ ] Ninguna app actual de RapidPack soporta esto — requiere conversación con el cliente para definir cómo mostrarlo
+- [ ] Ideas iniciales: badge o indicador en la card, sección separada en el detalle del paquete
 
 ### Ícono por tipo de paquete
 - [ ] Modelo local de detección por palabras clave en el nombre de categoría → ícono

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.5] - 2026-04-21
+### Added
+- Onboarding screen — first-time flow with two questions: app mode (simple/complete) and handedness (right/left)
+- `PreferencesService` — reads/writes `shared_preferences` for mode, handedness, onboarding status
+- `shared_preferences ^2.3.2` added as dependency
+
+### Changed
+- `SplashScreen` refactored to navigate (pushReplacement with slide-up transition) instead of rendering screens inline
+- Splash checks onboarding status and routes to `OnboardingScreen` or `PackagesScreen` accordingly
+- `PackageCard` pills row now spans full card width, icon row vertically centered
+
+---
+
 ## [0.0.4] - 2026-04-21
 ### Added
 - `SplashScreen` — fondo rojo completo con logo centrado, 3s de espera con carga en background

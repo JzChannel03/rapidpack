@@ -8,45 +8,50 @@ class PackagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final topPadding = MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: Colors.red,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(
-                        'assets/images/rapidpack.jpg',
-                        height: 50,
-                        width: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const NavBar(),
-                  ],
-                ),
+      body: Container(
+        color: Colors.red,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                top: topPadding + 12,
+                left: 16,
+                right: 16,
+                bottom: 12,
               ),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      'assets/images/rapidpack.jpg',
+                      height: 50,
+                      width: 50,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  padding: const EdgeInsets.all(10),
-                  child: const PackageList(),
-                ),
+                  const NavBar(),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                padding: const EdgeInsets.all(10),
+                child: const PackageList(),
+              ),
+            ),
+          ],
         ),
       ),
     );

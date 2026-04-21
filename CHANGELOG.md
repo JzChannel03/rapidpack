@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.0.3] - 2026-04-21
+### Added
+- `PackageModel` con todos los campos del paquete + enum `PackageState`
+- `PackageService` — carga y parsea `assets/mock/packages.json` via rootBundle
+- JSON mock con 7 paquetes en distintos estados para desarrollo
+- `PackageProgressBar` — stepper horizontal con 6 estados, nodo activo animado, retraso en ámbar
+- `PulsingWidget` genérico en `core/widgets/` — animación de pulso reutilizable
+- `date_formatter.dart` en `core/utils/` — fechas en español con `intl`
+- Ícono `ⓘ` animado con dialog compacto explicando la fecha estimada
+- Fondo rojo extendido hasta la barra de notificaciones (sin SafeArea, con padding manual)
+- `intl` como dependencia para formateo de fechas
+
+### Changed
+- `PackageCard` ahora recibe `PackageModel` — datos reales del JSON
+- `PackageList` usa `FutureBuilder` con `PackageService`
+- `PackageProgressBar` importa `PackageState` desde el modelo (sin duplicación)
+
+---
+
 ## [0.0.2] - 2026-04-21
 ### Added
 - Estructura modular por features (`app/`, `core/`, `features/`)

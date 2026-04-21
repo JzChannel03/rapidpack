@@ -1,0 +1,86 @@
+[
+  {
+    "id": "PKG-001",
+    "categoria": "ACCESORIO DEPORTIVO",
+    "guia": "WR042301822671",
+    "tracking": "4203########61925",
+    "peso": 1.85,
+    "monto": 420.00,
+    "fechaLlegada": "2023-07-24T09:30:00",
+    "fechaExpected": "2026-04-28T00:00:00",
+    "estado": "embarcado",
+    "tieneRetraso": false
+  },
+  {
+    "id": "PKG-002",
+    "categoria": "ARTICULO PERSONAL Y ACCESORIOS",
+    "guia": "WR042301822246",
+    "tracking": "4203########05282",
+    "peso": 1.40,
+    "monto": 301.00,
+    "fechaLlegada": "2023-07-24T10:15:00",
+    "fechaExpected": "2026-05-02T00:00:00",
+    "estado": "embarcado",
+    "tieneRetraso": true
+  },
+  {
+    "id": "PKG-003",
+    "categoria": "ELECTRONICO",
+    "guia": "WR042403198586",
+    "tracking": "4203##########65312",
+    "peso": 1.95,
+    "monto": 415.25,
+    "fechaLlegada": "2024-12-09T07:37:00",
+    "fechaExpected": "2026-05-10T00:00:00",
+    "estado": "aduanaAila",
+    "tieneRetraso": false
+  },
+  {
+    "id": "PKG-004",
+    "categoria": "ARTICULO PERSONAL Y ACCESORIOS",
+    "guia": "WR042403191377",
+    "tracking": "4203##########57038",
+    "peso": 4.15,
+    "monto": 892.25,
+    "fechaLlegada": "2024-12-06T09:40:00",
+    "fechaExpected": "2026-05-15T00:00:00",
+    "estado": "contenedorSucursal",
+    "tieneRetraso": false
+  },
+  {
+    "id": "PKG-005",
+    "categoria": "ROPA Y CALZADO",
+    "guia": "WR042501100123",
+    "tracking": "4203##########78901",
+    "peso": 2.30,
+    "monto": 650.00,
+    "fechaLlegada": "2025-01-10T14:20:00",
+    "fechaExpected": "2026-04-25T00:00:00",
+    "estado": "enCamino",
+    "tieneRetraso": false
+  },
+  {
+    "id": "PKG-006",
+    "categoria": "SUPLEMENTO ALIMENTICIO",
+    "guia": "WR042501100456",
+    "tracking": "4203##########34567",
+    "peso": 3.10,
+    "monto": 280.50,
+    "fechaLlegada": "2025-01-05T08:00:00",
+    "fechaExpected": "2026-04-20T00:00:00",
+    "estado": "entregado",
+    "tieneRetraso": false
+  },
+  {
+    "id": "PKG-007",
+    "categoria": "HERRAMIENTA",
+    "guia": "WR042501200789",
+    "tracking": "4203##########90123",
+    "peso": 5.75,
+    "monto": 1200.00,
+    "fechaLlegada": "2025-02-01T11:45:00",
+    "fechaExpected": "2026-05-20T00:00:00",
+    "estado": "almacenMiami",
+    "tieneRetraso": false
+  }
+]

@@ -9,3 +9,9 @@ Al terminar cualquier conjunto de cambios en el proyecto, actualizar siempre est
 - **PENDING.md** — Marcar como completado lo que se hizo (`[x]`) y agregar nuevos pendientes que surjan
 
 Esto debe hacerse al final de cada sesión de cambios, antes del commit.
+
+## Widgets reutilizables
+
+Todo widget que pueda usarse en más de un lugar del proyecto va en `lib/core/widgets/`, no dentro de un feature específico. Ejemplos: animaciones, componentes de UI genéricos, wrappers de comportamiento.
+
+Si al escribir un widget dentro de un feature se detecta que es genérico (no depende de datos del feature), extraerlo a `core/widgets/` de inmediato y hacer el import correspondiente.

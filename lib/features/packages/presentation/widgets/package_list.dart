@@ -13,9 +13,8 @@ class PackageList extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: CustomColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
-          gap: 16,
+          gap: 12,
           children: [
-            PackageCard(),
             PackageCard(),
             PackageCard(),
             PackageCard(),

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:rapidpack/widgets/packages.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({super.key});
+import '../widgets/package_list.dart';
+
+class PackagesScreen extends StatelessWidget {
+  const PackagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          body: SafeArea(
+    return Scaffold(
+      body: SafeArea(
         child: Column(
           children: [
-            // Barra personalizada
             Container(
               color: Colors.red,
               padding: const EdgeInsets.all(16.0),
@@ -26,14 +25,12 @@ class MyAppBar extends StatelessWidget {
                 ],
               ),
             ),
-            // Contenido del cuerpo
             const Expanded(
-              child: Packages(),
+              child: PackageList(),
             ),
           ],
         ),
-      )),
-      debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.4] - 2026-04-21
+### Added
+- `SplashScreen` — fondo rojo completo con logo centrado, 3s de espera con carga en background
+- Logo sale disparado a la derecha (stretch + easeIn) al terminar la carga
+- Header (logo circular + NavBar) hace fade in después de que sale el logo
+- Contenedor blanco con paquetes sube desde abajo independientemente del header
+- `assets/images/logo-dark.png` — logo oficial RapidPack con fondo transparente
+
+### Changed
+- `PackagesScreen` acepta `preloadedPackages` opcional para evitar doble carga
+- `PackageList` usa `preloadedPackages` directamente si están disponibles, omitiendo el `FutureBuilder`
+- `RapidPackApp` apunta a `SplashScreen` como home
+
+---
+
 ## [0.0.3] - 2026-04-21
 ### Added
 - `PackageModel` con todos los campos del paquete + enum `PackageState`

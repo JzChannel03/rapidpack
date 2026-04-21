@@ -6,10 +6,36 @@ import '../../data/services/package_service.dart';
 import 'package_card.dart';
 
 class PackageList extends StatelessWidget {
-  const PackageList({super.key});
+  final List<PackageModel>? preloadedPackages;
+
+  const PackageList({super.key, this.preloadedPackages});
+
+  Widget _buildList(List<PackageModel> packages) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: CustomColumn(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          gap: 12,
+          children: packages.map((p) => PackageCard(package: p)).toList(),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (preloadedPackages != null) {
+      return preloadedPackages!.isEmpty
+          ? const Center(
+              child: Text(
+                'No hay paquetes disponibles.',
+                style: TextStyle(color: Color(0xFF999999)),
+              ),
+            )
+          : _buildList(preloadedPackages!);
+    }
+
     return FutureBuilder<List<PackageModel>>(
       future: PackageService.getMockPackages(),
       builder: (context, snapshot) {
@@ -28,18 +54,7 @@ class PackageList extends StatelessWidget {
           );
         }
 
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: CustomColumn(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              gap: 12,
-              children: snapshot.data!
-                  .map((p) => PackageCard(package: p))
-                  .toList(),
-            ),
-          ),
-        );
+        return _buildList(snapshot.data!);
       },
     );
   }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/nav_bar.dart';
+import '../../data/models/package_model.dart';
 import '../widgets/package_list.dart';
 
 class PackagesScreen extends StatelessWidget {
-  const PackagesScreen({super.key});
+  final List<PackageModel>? preloadedPackages;
+
+  const PackagesScreen({super.key, this.preloadedPackages});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class PackagesScreen extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.all(10),
-                child: const PackageList(),
+                child: PackageList(preloadedPackages: preloadedPackages),
               ),
             ),
           ],

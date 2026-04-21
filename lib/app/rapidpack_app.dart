@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../features/packages/presentation/screens/packages_screen.dart';
+import '../features/splash/presentation/screens/splash_screen.dart';
 
 class RapidPackApp extends StatelessWidget {
   const RapidPackApp({super.key});
@@ -13,7 +13,7 @@ class RapidPackApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const PackagesScreen(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

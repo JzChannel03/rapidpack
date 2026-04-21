@@ -6,18 +6,11 @@
 - [x] Fechas en español con formato uniforme usando `intl`
 - [x] Modelo de datos `PackageModel` + JSON mock + `PackageService`
 - [x] `PulsingWidget` genérico en `core/widgets/`
+- [x] Splash screen — fondo rojo, logo centrado, carga en background, logo sale disparado, header fade in + body slide up
 
 ---
 
 ## Próximo a implementar
-
-### Splash screen
-- [ ] Pantalla de splash al entrar al app:
-  - Fondo rojo completo (sin cuerpo blanco)
-  - Logo de RapidPack centrado a mayor tamaño
-  - Animación del logo: movimiento rápido hacia la derecha (efecto velocidad)
-  - Timer de 3 segundos simulando carga
-  - Al terminar: logo sale por la derecha y el contenedor blanco con los paquetes sube desde abajo
 
 ### Onboarding de accesibilidad (primera vez — via shared_preferences)
 - [ ] Al entrar por primera vez, mostrar pantalla de preferencias antes del home:

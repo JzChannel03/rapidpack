@@ -7,16 +7,7 @@ class PackageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(15),
-        ),
-        border: Border.all(
-          color: Colors.black,
-          width: 2,
-          style: BorderStyle.solid,
-        ),
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: const Column(
         children: [
           PackageDetails(),
@@ -32,65 +23,83 @@ class PackageDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Center(
-            child: Text(
-              'ACCESORIO DEPORTIVO',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            height: 12,
-          ),
-          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                    ),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      '1.85 Lb',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
+              const Text(
+                '#4589632579',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.white,
                 ),
               ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'RD\$ 420.00',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+              Chip(
+                label: const Text('Procesando'),
+                backgroundColor: Colors.blue[900],
+                labelStyle: const TextStyle(color: Colors.white, fontSize: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
+                side: BorderSide.none,
               ),
             ],
           ),
+          const Divider(color: Colors.white, thickness: 1),
+          const SizedBox(height: 8),
+          const Text(
+            'ACCESORIO DEPORTIVO',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              _InfoPill(label: '1.85 Lb', icon: Icons.scale_outlined),
+              const SizedBox(width: 8),
+              _InfoPill(label: 'RD\$ 420.00', icon: Icons.attach_money),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoPill extends StatelessWidget {
+  final String label;
+  final IconData icon;
+
+  const _InfoPill({required this.label, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.white38),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: Colors.white, size: 14),
+          const SizedBox(width: 4),
+          Text(label, style: const TextStyle(color: Colors.white, fontSize: 13)),
         ],
       ),
     );

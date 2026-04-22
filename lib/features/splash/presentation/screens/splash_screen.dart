@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/preferences_service.dart';
-import '../../../packages/data/models/package_model.dart';
 import '../../../packages/data/services/package_service.dart';
 import '../../../packages/presentation/screens/packages_screen.dart';
 import '../../../onboarding/presentation/screens/onboarding_screen.dart';
@@ -41,9 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _startSequence() async {
     final packages = await PackageService.getMockPackages();
-    // DEBUG: force onboarding every launch for testing
-    const onboardingDone = false;
-    await PreferencesService.isOnboardingDone(); // keep call to avoid unused import
+    final onboardingDone = await PreferencesService.isOnboardingDone();
 
     if (!mounted) return;
 

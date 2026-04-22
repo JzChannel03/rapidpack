@@ -19,9 +19,9 @@
 - [ ] Analizar cómo hacerlo sin resultar condescendiente en el UX
 
 ### Onboarding — usar preferencias guardadas
-- [ ] Leer `AppMode` y `Handedness` desde `PreferencesService` en `PackagesScreen`
-- [ ] Aplicar modo simple o completo según preferencia
-- [ ] Posicionar botones flotantes según mano dominante (modo completo)
+- [x] Leer `AppMode` y `Handedness` desde `PreferencesService` en `PackagesScreen`
+- [x] Aplicar modo simple o completo según preferencia
+- [x] Posicionar botones flotantes según mano dominante (modo completo)
 
 ### ~~Modo simple~~ ✅ Completado
 - [x] Dos tabs encima del listado: **"Disponibles"** y **"Todos"** — filtran la misma lista
@@ -29,27 +29,18 @@
 - [x] "Disponibles" seleccionado por defecto (izquierda); full-width, estilo iOS segmented control
 - [x] Paquetes `retirado` ocultos del listado principal (van a historial, próxima feature)
 
-### Modo completo — próxima rama (Task-Rap-6)
-Objetivo: vista avanzada con búsqueda y filtros/orden flotantes posicionados según mano dominante.
+### ~~Modo completo~~ ✅ Completado (Task-Rap-6)
+- [x] Barra de búsqueda full-width debajo del header — filtra por categoría, guía o tracking
+- [x] Dos botones flotantes circulares (filtro + orden) posicionados según `Handedness`
+- [x] Filter bottom sheet: por estado (6 estados), con "Limpiar" y "Aplicar"
+- [x] Sort bottom sheet: 7 opciones (más reciente, más antiguo, peso, monto, estado)
+- [x] Badge activo en FAB (rojo) + botón × para limpiar individualmente
+- [x] Sin tabs en modo completo
+- [x] `isOnboardingDone` real activado en splash (removido `const onboardingDone = false`)
 
-- [ ] **Barra de búsqueda** debajo del header (full width), filtra por categoría, guía o tracking
-- [ ] **Dos botones flotantes circulares** sobre el listado, alineados al lado de la mano dominante:
-  - Leer `Handedness` desde `PreferencesService` → botones a la **derecha** (diestro) o **izquierda** (zurdo)
-  - **Botón 1 — Filtro** (`Icons.filter_list`): panel/bottom sheet con criterios:
-    - Por estado (`almacenMiami`, `embarcado`, `aduanaAila`, `contenedorSucursal`, `enCamino`, `disponibleParaRetirar`)
-    - Por rango de fecha de llegada
-    - Por rango de peso o monto (TBD con cliente)
-  - **Botón 2 — Orden** (`Icons.sort`): opciones de ordenamiento:
-    - Más reciente primero (default)
-    - Más antiguo primero
-    - Por peso (mayor/menor)
-    - Por monto (mayor/menor)
-    - Por estado (orden del flujo)
-  - Cada botón muestra un **badge** cuando tiene filtro/orden activo
-  - Debajo de cada botón activo aparece un ícono `×` para limpiar ese filtro individualmente
-- [ ] Sin tabs (el segmented control de modo simple no aplica en completo)
-- [ ] Sketch del usuario pendiente — confirmar diseño antes de implementar
-- [ ] Activar `isOnboardingDone` real (quitar `const onboardingDone = false` del splash)
+#### Pendiente de modo completo
+- [ ] Filtro por rango de fecha de llegada (requiere date picker — postergado)
+- [ ] Filtro por rango de peso o monto (pendiente de conversación con cliente)
 
 ### NavBar — estado offline
 - [ ] Cuando no hay conexión, el NavBar se muestra completamente blanco con texto "Sin conexión"

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.7] - 2026-04-22
+### Added
+- Complete mode: full-width search bar below header — filters by category, tracking number, or guide
+- Two floating circular FABs (filter + sort) positioned on the dominant hand side (right/left) via `Handedness` preference
+- Filter bottom sheet: select one or more package states to narrow the list; "Limpiar" resets selection
+- Sort bottom sheet: 7 ordering options (newest/oldest, weight desc/asc, amount desc/asc, by state flow)
+- Active badge on FAB buttons when a filter or sort is applied (button turns red); × button below each to clear individually
+- `Handedness` now read from `PreferencesService` in `PackagesScreen` alongside `AppMode`
+
+### Changed
+- Splash screen: removed hardcoded `const onboardingDone = false` — now reads the real `PreferencesService.isOnboardingDone()` value
+- Removed unused `_deprecated_app_experiments.dart`
+
 ## [0.0.6] - 2026-04-21
 ### Added
 - Simple mode segmented tabs ("Disponibles" / "Todos") — full-width iOS-style selector above the package list

@@ -23,17 +23,33 @@
 - [ ] Aplicar modo simple o completo según preferencia
 - [ ] Posicionar botones flotantes según mano dominante (modo completo)
 
-### Modo simple
-- [ ] Dos tabs encima del listado: **"Todos"** y **"Disponibles para retirar"** — filtran la misma lista
-- [ ] "Disponibles para retirar" = paquetes en estado `contenedorSucursal` o `enCamino`
-- [ ] Sin filtros complejos ni elementos adicionales
-- [ ] Orientado a personas con poca experiencia en apps (ej. adultos mayores)
+### ~~Modo simple~~ ✅ Completado
+- [x] Dos tabs encima del listado: **"Disponibles"** y **"Todos"** — filtran la misma lista
+- [x] "Disponibles" = solo `disponibleParaRetirar`; barra completa indica listo para retiro
+- [x] "Disponibles" seleccionado por defecto (izquierda); full-width, estilo iOS segmented control
+- [x] Paquetes `retirado` ocultos del listado principal (van a historial, próxima feature)
 
-### Modo completo
-- [ ] Botones flotantes del lado de la mano dominante del usuario para filtrar y ordenar:
-  - Por fecha, estado, y otros criterios a definir
-  - Cada botón con una `x` debajo para limpiar ese filtro individualmente
-- [ ] Diseño pendiente de sketch del usuario
+### Modo completo — próxima rama (Task-Rap-6)
+Objetivo: vista avanzada con búsqueda y filtros/orden flotantes posicionados según mano dominante.
+
+- [ ] **Barra de búsqueda** debajo del header (full width), filtra por categoría, guía o tracking
+- [ ] **Dos botones flotantes circulares** sobre el listado, alineados al lado de la mano dominante:
+  - Leer `Handedness` desde `PreferencesService` → botones a la **derecha** (diestro) o **izquierda** (zurdo)
+  - **Botón 1 — Filtro** (`Icons.filter_list`): panel/bottom sheet con criterios:
+    - Por estado (`almacenMiami`, `embarcado`, `aduanaAila`, `contenedorSucursal`, `enCamino`, `disponibleParaRetirar`)
+    - Por rango de fecha de llegada
+    - Por rango de peso o monto (TBD con cliente)
+  - **Botón 2 — Orden** (`Icons.sort`): opciones de ordenamiento:
+    - Más reciente primero (default)
+    - Más antiguo primero
+    - Por peso (mayor/menor)
+    - Por monto (mayor/menor)
+    - Por estado (orden del flujo)
+  - Cada botón muestra un **badge** cuando tiene filtro/orden activo
+  - Debajo de cada botón activo aparece un ícono `×` para limpiar ese filtro individualmente
+- [ ] Sin tabs (el segmented control de modo simple no aplica en completo)
+- [ ] Sketch del usuario pendiente — confirmar diseño antes de implementar
+- [ ] Activar `isOnboardingDone` real (quitar `const onboardingDone = false` del splash)
 
 ### NavBar — estado offline
 - [ ] Cuando no hay conexión, el NavBar se muestra completamente blanco con texto "Sin conexión"

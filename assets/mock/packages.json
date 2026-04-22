@@ -68,7 +68,7 @@
     "monto": 280.50,
     "fechaLlegada": "2025-01-05T08:00:00",
     "fechaExpected": "2026-04-20T00:00:00",
-    "estado": "entregado",
+    "estado": "disponibleParaRetirar",
     "tieneRetraso": false
   },
   {
@@ -81,6 +81,18 @@
     "fechaLlegada": "2025-02-01T11:45:00",
     "fechaExpected": "2026-05-20T00:00:00",
     "estado": "almacenMiami",
+    "tieneRetraso": false
+  },
+  {
+    "id": "PKG-008",
+    "categoria": "JUGUETE",
+    "guia": "WR042501300112",
+    "tracking": "4203##########11223",
+    "peso": 0.90,
+    "monto": 145.00,
+    "fechaLlegada": "2025-03-10T09:00:00",
+    "fechaExpected": "2026-03-30T00:00:00",
+    "estado": "retirado",
     "tieneRetraso": false
   }
 ]

@@ -13,7 +13,7 @@ class PackageList extends StatelessWidget {
   Widget _buildList(List<PackageModel> packages) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
         child: CustomColumn(
           crossAxisAlignment: CrossAxisAlignment.start,
           gap: 12,

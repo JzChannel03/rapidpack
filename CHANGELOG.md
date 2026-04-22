@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.0.6] - 2026-04-21
+### Added
+- Simple mode segmented tabs ("Disponibles" / "Todos") — full-width iOS-style selector above the package list
+- "Disponibles" selected by default (left); "Todos" on right — both filter the same list
+- `retirado` state to `PackageState` enum — packages in this state are hidden from the main list (reserved for history)
+
+### Changed
+- `PackageState` enum refactored: `entregado` → `disponibleParaRetirar` (step 6 of progress bar, full bar = ready to pick up); `retirado` added as step 7
+- Progress bar redesigned: continuous `LinearProgressIndicator` with animated fill + circular nodes rendered on top; replaced segmented line approach
+- `TweenAnimationBuilder` now uses `key: ValueKey(activeIndex)` — fixes state reuse bug that caused right-to-left fill animation when switching tabs
+- `PackagesScreen` converted to `StatefulWidget` — loads `AppMode` from `PreferencesService` and applies tab filtering
+- Mock JSON updated: PKG-006 → `disponibleParaRetirar`, PKG-008 added with `retirado` state
+
+### Fixed
+- Progress bar fill animating right-to-left for packages at position [0] after tab switch (Flutter widget state reuse)
+
+---
+
 ## [0.0.5] - 2026-04-21
 ### Added
 - Onboarding screen — first-time flow with two questions: app mode (simple/complete) and handedness (right/left)

@@ -9,12 +9,13 @@ class PackageCard extends StatelessWidget {
   const PackageCard({super.key, required this.package});
 
   String get _estadoLabel => switch (package.estado) {
-        PackageState.almacenMiami      => 'Almacén Miami',
-        PackageState.embarcado         => 'Embarcado',
-        PackageState.aduanaAila        => 'Aduana / AILA',
-        PackageState.contenedorSucursal => 'Contenedor sucursal',
-        PackageState.enCamino          => 'En camino',
-        PackageState.entregado         => 'Entregado',
+        PackageState.almacenMiami          => 'Almacén Miami',
+        PackageState.embarcado             => 'Embarcado',
+        PackageState.aduanaAila            => 'Aduana / AILA',
+        PackageState.contenedorSucursal    => 'Contenedor sucursal',
+        PackageState.enCamino              => 'En camino',
+        PackageState.disponibleParaRetirar => 'Disponible para retirar',
+        PackageState.retirado              => 'Retirado',
       };
 
   @override

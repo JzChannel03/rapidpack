@@ -4,7 +4,8 @@ enum PackageState {
   aduanaAila,
   contenedorSucursal,
   enCamino,
-  entregado,
+  disponibleParaRetirar, // barra completa — listo para retirar en sucursal
+  retirado,              // ya retirado — se oculta del listado, va a historial
 }
 
 class PackageModel {

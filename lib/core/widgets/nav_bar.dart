@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+  final int selectedIndex;
+  final ValueChanged<int>? onTap;
+
+  const NavBar({
+    super.key,
+    this.selectedIndex = 0,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 220,
       height: 60,
-      decoration: BoxDecoration(
-        color: Colors.red[700],
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        boxShadow: const [
+      decoration: const BoxDecoration(
+        color: AppColors.darkRed,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        boxShadow: [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 10,
@@ -24,28 +32,21 @@ class NavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.home_outlined),
-            color: Colors.white,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.access_time_outlined),
-            color: Colors.white,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_outlined),
-            color: Colors.white,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.person_outline),
-            color: Colors.white,
-          ),
+          _buildItem(0, Icons.home_outlined, Icons.home),
+          _buildItem(1, Icons.access_time_outlined, Icons.access_time),
+          _buildItem(2, Icons.notifications_outlined, Icons.notifications),
+          _buildItem(3, Icons.person_outline, Icons.person),
         ],
       ),
+    );
+  }
+
+  Widget _buildItem(int index, IconData outlineIcon, IconData filledIcon) {
+    final isSelected = selectedIndex == index;
+    return IconButton(
+      onPressed: () => onTap?.call(index),
+      icon: Icon(isSelected ? filledIcon : outlineIcon),
+      color: isSelected ? Colors.white : Colors.white.withValues(alpha: 0.5),
     );
   }
 }

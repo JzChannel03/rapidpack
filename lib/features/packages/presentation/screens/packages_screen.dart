@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/preferences_service.dart';
+import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/nav_bar.dart';
 import '../../../../../core/widgets/pulsing_widget.dart';
 import '../../data/models/package_model.dart';
@@ -154,7 +155,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
 
     return Scaffold(
       body: Container(
-        color: Colors.red,
+        color: AppColors.primaryRed,
         child: Stack(
           children: [
             // Contenido de fondo: Cabecera y sección de anuncios
@@ -197,7 +198,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
               builder: (context, scrollController) {
                 return Container(
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.background,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -239,7 +240,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                                           Text(
                                             'Desliza para ver todos los paquetes',
                                             style: TextStyle(
-                                              color: const Color(0xFF1A1A1A).withValues(alpha: 0.6),
+                                              color: AppColors.textDark.withValues(alpha: 0.6),
                                               fontSize: 11,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -331,12 +332,12 @@ class _SearchBarState extends State<_SearchBar> {
       child: TextField(
         controller: widget.controller,
         onChanged: widget.onChanged,
-        style: const TextStyle(fontSize: 14, color: Color(0xFF1A1A1A)),
+        style: const TextStyle(fontSize: 14, color: AppColors.textDark),
         decoration: InputDecoration(
           hintText: 'Buscar por categoría, guía o tracking...',
-          hintStyle: const TextStyle(fontSize: 13, color: Color(0xFF999999)),
+          hintStyle: const TextStyle(fontSize: 13, color: AppColors.textMuted),
           prefixIcon:
-              const Icon(Icons.search, color: Color(0xFF999999), size: 20),
+              const Icon(Icons.search, color: AppColors.textMuted, size: 20),
           suffixIcon: hasText
               ? GestureDetector(
                   onTap: () {
@@ -344,13 +345,13 @@ class _SearchBarState extends State<_SearchBar> {
                     widget.onChanged('');
                   },
                   child: const Icon(Icons.close,
-                      color: Color(0xFF999999), size: 18),
+                      color: AppColors.textMuted, size: 18),
                 )
               : null,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           filled: true,
-          fillColor: const Color(0xFFF5F5F5),
+          fillColor: AppColors.surfaceGray,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -362,7 +363,7 @@ class _SearchBarState extends State<_SearchBar> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide:
-                const BorderSide(color: Color(0xFFDDDDDD), width: 1),
+                const BorderSide(color: AppColors.borderGray, width: 1),
           ),
         ),
       ),
@@ -444,7 +445,7 @@ class _FABButton extends StatelessWidget {
             width: 52,
             height: 52,
             decoration: BoxDecoration(
-              color: isActive ? Colors.red : Colors.white,
+              color: isActive ? AppColors.primaryRed : AppColors.background,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -456,7 +457,7 @@ class _FABButton extends StatelessWidget {
             ),
             child: Icon(
               icon,
-              color: isActive ? Colors.white : const Color(0xFF1A1A1A),
+              color: isActive ? Colors.white : AppColors.textDark,
               size: 22,
             ),
           ),
@@ -469,11 +470,11 @@ class _FABButton extends StatelessWidget {
               width: 24,
               height: 24,
               decoration: const BoxDecoration(
-                color: Color(0xFFEEEEEE),
+                color: AppColors.surfaceGray,
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.close,
-                  size: 13, color: Color(0xFF666666)),
+                  size: 13, color: AppColors.textGray),
             ),
           ),
         ],
@@ -528,13 +529,13 @@ class _FilterSheetState extends State<_FilterSheet> {
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1A1A1A),
+                  color: AppColors.textDark,
                 ),
               ),
               TextButton(
                 onPressed: () => setState(() => _selected.clear()),
                 child: const Text('Limpiar',
-                    style: TextStyle(color: Colors.red)),
+                    style: TextStyle(color: AppColors.primaryRed)),
               ),
             ],
           ),
@@ -559,8 +560,8 @@ class _FilterSheetState extends State<_FilterSheet> {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.primaryRed,
+                foregroundColor: AppColors.background,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
@@ -601,10 +602,10 @@ class _CheckRow extends StatelessWidget {
               width: 22,
               height: 22,
               decoration: BoxDecoration(
-                color: checked ? Colors.red : Colors.transparent,
+                color: checked ? AppColors.primaryRed : Colors.transparent,
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color: checked ? Colors.red : const Color(0xFFCCCCCC),
+                  color: checked ? AppColors.primaryRed : AppColors.borderGray,
                   width: 1.5,
                 ),
               ),
@@ -615,7 +616,7 @@ class _CheckRow extends StatelessWidget {
             const SizedBox(width: 12),
             Text(label,
                 style: const TextStyle(
-                    fontSize: 14, color: Color(0xFF1A1A1A))),
+                    fontSize: 14, color: AppColors.textDark)),
           ],
         ),
       ),
@@ -654,7 +655,7 @@ class _SortSheet extends StatelessWidget {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
+              color: AppColors.textDark,
             ),
           ),
           const SizedBox(height: 8),
@@ -677,8 +678,8 @@ class _SortSheet extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           color: isSelected
-                              ? Colors.red
-                              : const Color(0xFF1A1A1A),
+                              ? AppColors.primaryRed
+                              : AppColors.textDark,
                           fontWeight: isSelected
                               ? FontWeight.w600
                               : FontWeight.w400,
@@ -686,7 +687,7 @@ class _SortSheet extends StatelessWidget {
                       ),
                     ),
                     if (isSelected)
-                      const Icon(Icons.check, color: Colors.red, size: 18),
+                      const Icon(Icons.check, color: AppColors.primaryRed, size: 18),
                   ],
                 ),
               ),
@@ -716,7 +717,7 @@ class _SimpleModeTabs extends StatelessWidget {
       child: Container(
         height: 46,
         decoration: BoxDecoration(
-          color: const Color(0xFFEEEEEE),
+          color: AppColors.surfaceGray,
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
@@ -765,7 +766,7 @@ class _Tab extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         margin: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: selected ? Colors.white : Colors.transparent,
+          color: selected ? AppColors.background : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           boxShadow: selected
               ? [
@@ -781,7 +782,7 @@ class _Tab extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              color: selected ? Colors.red : const Color(0xFF999999),
+              color: selected ? AppColors.primaryRed : AppColors.textMuted,
               fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
               fontSize: 13,
             ),
@@ -883,7 +884,7 @@ class _AdsSection extends StatelessWidget {
                         ),
                         child: Icon(
                           ad.icon,
-                          color: const Color(0xFF4FC3F7),
+                          color: AppColors.accentBlue,
                           size: 22,
                         ),
                       ),

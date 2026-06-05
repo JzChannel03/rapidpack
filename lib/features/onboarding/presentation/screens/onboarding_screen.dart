@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/preferences_service.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/slide_up_route.dart';
 import '../../../packages/data/models/package_model.dart';
 import '../../../packages/presentation/screens/packages_screen.dart';
 
@@ -29,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     Navigator.pushReplacement(
       context,
-      _SlideUpRoute(
+      SlideUpRoute(
         page: PackagesScreen(preloadedPackages: widget.preloadedPackages),
       ),
     );
@@ -41,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: AppColors.primaryRed,
       body: Column(
         children: [
           // Header
@@ -81,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.background,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -97,7 +99,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF1A1A1A),
+                        color: AppColors.textDark,
                         height: 1.4,
                       ),
                     ),
@@ -106,7 +108,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       'Podrás cambiar esto después en tu perfil.',
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xFF888888),
+                        color: AppColors.textMuted,
                       ),
                     ),
                     const SizedBox(height: 32),
@@ -187,10 +189,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: ElevatedButton(
                           onPressed: _canContinue ? _submit : null,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            foregroundColor: Colors.white,
-                            disabledBackgroundColor: Colors.red,
-                            disabledForegroundColor: Colors.white,
+                            backgroundColor: AppColors.primaryRed,
+                            foregroundColor: AppColors.background,
+                            disabledBackgroundColor: AppColors.primaryRed,
+                            disabledForegroundColor: AppColors.background,
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
@@ -233,14 +235,14 @@ class _QuestionLabel extends StatelessWidget {
           width: 24,
           height: 24,
           decoration: const BoxDecoration(
-            color: Colors.red,
+            color: AppColors.primaryRed,
             shape: BoxShape.circle,
           ),
           child: Center(
             child: Text(
               number,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.background,
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
@@ -254,7 +256,7 @@ class _QuestionLabel extends StatelessWidget {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF1A1A1A),
+              color: AppColors.textDark,
             ),
           ),
         ),
@@ -288,10 +290,10 @@ class _OptionCard extends StatelessWidget {
         duration: const Duration(milliseconds: 180),
         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 14),
         decoration: BoxDecoration(
-          color: selected ? const Color(0xFFFFF0EE) : Colors.white,
+          color: selected ? AppColors.lightRedBg : AppColors.background,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: selected ? Colors.red : const Color(0xFFE0E0E0),
+            color: selected ? AppColors.primaryRed : AppColors.borderGray,
             width: selected ? 2 : 1,
           ),
         ),
@@ -302,7 +304,7 @@ class _OptionCard extends StatelessWidget {
               scaleX: flipIcon ? -1 : 1,
               child: Icon(
                 icon,
-                color: selected ? Colors.red : const Color(0xFF999999),
+                color: selected ? AppColors.primaryRed : AppColors.textMuted,
                 size: 26,
               ),
             ),
@@ -312,7 +314,7 @@ class _OptionCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: selected ? Colors.red : const Color(0xFF1A1A1A),
+                color: selected ? AppColors.primaryRed : AppColors.textDark,
               ),
             ),
             const SizedBox(height: 4),
@@ -320,7 +322,7 @@ class _OptionCard extends StatelessWidget {
               description,
               style: const TextStyle(
                 fontSize: 11,
-                color: Color(0xFF888888),
+                color: AppColors.textMuted,
                 height: 1.4,
               ),
             ),
@@ -331,21 +333,4 @@ class _OptionCard extends StatelessWidget {
   }
 }
 
-class _SlideUpRoute<T> extends PageRouteBuilder<T> {
-  final Widget page;
 
-  _SlideUpRoute({required this.page})
-      : super(
-          pageBuilder: (_, __, ___) => page,
-          transitionDuration: const Duration(milliseconds: 500),
-          transitionsBuilder: (_, animation, __, child) => SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, 1),
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(parent: animation, curve: Curves.easeOut),
-            ),
-            child: child,
-          ),
-        );
-}

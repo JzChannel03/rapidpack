@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/preferences_service.dart';
+import '../../../../../core/widgets/slide_up_route.dart';
 import '../../../packages/data/services/package_service.dart';
 import '../../../packages/presentation/screens/packages_screen.dart';
 import '../../../onboarding/presentation/screens/onboarding_screen.dart';
@@ -40,9 +41,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _startSequence() async {
     final packages = await PackageService.getMockPackages();
-    // DEBUG: force onboarding every launch for testing
-    const onboardingDone = false;
-    await PreferencesService.isOnboardingDone();
+    final onboardingDone = await PreferencesService.isOnboardingDone();
 
     if (!mounted) return;
 
@@ -60,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Navigator.pushReplacement(
       context,
-      _SlideUpRoute(page: next),
+      SlideUpRoute(page: next),
     );
   }
 
@@ -100,21 +99,4 @@ class _SplashScreenState extends State<SplashScreen>
   }
 }
 
-class _SlideUpRoute<T> extends PageRouteBuilder<T> {
-  final Widget page;
 
-  _SlideUpRoute({required this.page})
-      : super(
-          pageBuilder: (_, __, ___) => page,
-          transitionDuration: const Duration(milliseconds: 500),
-          transitionsBuilder: (_, animation, __, child) => SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, 1),
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(parent: animation, curve: Curves.easeOut),
-            ),
-            child: child,
-          ),
-        );
-}

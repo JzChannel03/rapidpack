@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.9] - 2026-06-04
+### Added
+- Nueva clase de constantes `AppColors` en `lib/core/theme/` que centraliza todos los tokens del sistema de diseño y paleta de colores.
+- Nueva clase compartida `SlideUpRoute` en `lib/core/widgets/` para unificar la transición personalizada de pantallas y eliminar código duplicado.
+- Nueva sección de Directrices de Calidad de Código en `GEMINI.md`.
+
+### Changed
+- Configurado `seedColor: Colors.red` en `rapidpack_app.dart` para alinear los componentes Material 3 por defecto con la marca RapidPack.
+- Refactorizado el componente `NavBar` para hacerlo interactivo, aceptando `selectedIndex`, `onTap` y mostrando iconos rellenos/contorno con opacidad adaptativa.
+- Eliminadas las declaraciones locales y duplicadas de rutas en Splash y Onboarding.
+- Modificado `splash_screen.dart` para leer de forma asíncrona el estado real de onboarding, eliminando el linter de código muerto (`dead_code`).
+- Resuelta la advertencia de API obsoleta reemplazando `withOpacity` por `.withValues(alpha: ...)` en `package_progress_bar.dart`.
+- Migradas todas las referencias de colores hexadecimales e inline en Cards, ProgressBar, Onboarding y HomeScreen hacia la clase unificada `AppColors`.
+
 ## [0.0.8] - 2026-06-04
 ### Added
 - Panel deslizable (`DraggableScrollableSheet`) con efecto snap en `PackagesScreen` para ocultar o revelar contenido del fondo.

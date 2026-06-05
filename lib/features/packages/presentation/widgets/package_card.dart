@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../data/models/package_model.dart';
 import 'package_progress_bar.dart';
 
@@ -24,9 +25,9 @@ class PackageCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.background,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFEAEAEA)),
+        border: Border.all(color: AppColors.borderGray),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,11 +39,11 @@ class PackageCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFF0EE),
+                  color: AppColors.lightRedBg,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.inventory_2_outlined,
-                    color: Colors.red, size: 22),
+                    color: AppColors.primaryRed, size: 22),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -56,7 +57,7 @@ class PackageCard extends StatelessWidget {
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 13,
-                          color: Color(0xFF1A1A1A),
+                          color: AppColors.textDark,
                         ),
                       ),
                     ),
@@ -65,14 +66,14 @@ class PackageCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF0F0F0),
+                        color: AppColors.surfaceGray,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         _estadoLabel,
                         style: const TextStyle(
                           fontSize: 10,
-                          color: Color(0xFF555555),
+                          color: AppColors.textGray,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -90,7 +91,7 @@ class PackageCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 6),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFF5F5F5),
+                    color: AppColors.surfaceGray,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8),
                       bottomLeft: Radius.circular(8),
@@ -101,19 +102,19 @@ class PackageCard extends StatelessWidget {
                       '${package.peso} Lb',
                       style: const TextStyle(
                         fontSize: 13,
-                        color: Color(0xFF1A1A1A),
+                        color: AppColors.textDark,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
               ),
-              Container(width: 1, height: 32, color: const Color(0xFFE0E0E0)),
+              Container(width: 1, height: 32, color: AppColors.borderGray),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 6),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFF5F5F5),
+                    color: AppColors.surfaceGray,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(8),
                       bottomRight: Radius.circular(8),
@@ -124,7 +125,7 @@ class PackageCard extends StatelessWidget {
                       'RD\$ ${package.monto.toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontSize: 13,
-                        color: Colors.red,
+                        color: AppColors.primaryRed,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -134,7 +135,7 @@ class PackageCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          const Divider(color: Color(0xFFEAEAEA), height: 1),
+          const Divider(color: AppColors.borderGray, height: 1),
           const SizedBox(height: 14),
           PackageProgressBar(
             currentState: package.estado,

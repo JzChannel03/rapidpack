@@ -31,6 +31,13 @@ Al finalizar cualquier sesión de desarrollo o conjunto de cambios, es obligator
 - Para cambios complejos o nuevas características, crearemos primero un plan de implementación (`implementation_plan.md`) y lo validaremos con el usuario antes de proceder a la ejecución.
 - Mantendremos siempre la integridad de la documentación existente y comentarios de código.
 
+## Directrices de Calidad de Código y Patrones de Diseño
+
+- **Evitar Duplicidad (DRY):** Widgets de transiciones, animaciones comunes o navegaciones personalizadas (como rutas con animaciones slide/fade) deben centralizarse en `lib/core/widgets/` o `lib/core/routes/`. No se deben duplicar clases de soporte locales entre features.
+- **Sistema de Diseño Consistente:** No usar colores hexadecimales en bruto (`Color(0xFF...)`) en las tarjetas de presentación. Centralizar la paleta de colores en `lib/core/theme/app_colors.dart` y configurar el `ThemeData` principal con `seedColor: Colors.red` para que coincida con la marca RapidPack.
+- **APIs Modernas:** Usar siempre `.withValues(alpha: ...)` en lugar de `.withOpacity(...)` para evitar advertencias del linter de Flutter.
+- **Banderas de Depuración (Debug Flags):** Evitar dejar constantes de prueba (`const onboardingDone = false`) en código de producción que generen advertencias de código muerto (`dead_code`). Usar las llamadas asíncronas reales a los servicios de persistencia.
+
 ## Errores Comunes y Soluciones
 
 ### Error de compilación en iOS / Simulador (`iOS XX.X is not installed`)

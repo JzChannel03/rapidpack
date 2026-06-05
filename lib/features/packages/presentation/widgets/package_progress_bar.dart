@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_formatter.dart';
 import '../../../../core/widgets/pulsing_widget.dart';
 import '../../data/models/package_model.dart';
@@ -54,7 +55,7 @@ class PackageProgressBar extends StatelessWidget {
                 children: [
                   // Barra animada con LinearProgressIndicator
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: halfNode),
+                    padding: const EdgeInsets.symmetric(horizontal: halfNode),
                     child: TweenAnimationBuilder<double>(
                       key: ValueKey(activeIndex),
                       tween: Tween(begin: 0.0, end: targetProgress),
@@ -62,8 +63,8 @@ class PackageProgressBar extends StatelessWidget {
                       curve: Curves.easeOut,
                       builder: (_, value, __) => LinearProgressIndicator(
                         value: value,
-                        backgroundColor: const Color(0xFFE8E8E8),
-                        valueColor: const AlwaysStoppedAnimation(Colors.red),
+                        backgroundColor: AppColors.surfaceGray,
+                        valueColor: const AlwaysStoppedAnimation(AppColors.primaryRed),
                         minHeight: _kBarHeight,
                         borderRadius: BorderRadius.circular(_kBarHeight / 2),
                       ),
@@ -94,18 +95,18 @@ class PackageProgressBar extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         if (hasDelay)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 6),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 6),
             child: Row(
               children: [
                 Icon(Icons.warning_amber_rounded,
-                    size: 13, color: Colors.amber[700]),
-                const SizedBox(width: 4),
+                    size: 13, color: AppColors.alertAmber),
+                SizedBox(width: 4),
                 Text(
                   'Retraso línea aérea',
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.amber[800],
+                    color: AppColors.alertAmber,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -117,7 +118,7 @@ class PackageProgressBar extends StatelessWidget {
           children: [
             Text(
               formatDate(arrivalDate),
-              style: const TextStyle(fontSize: 11, color: Color(0xFF999999)),
+              style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
             ),
             Row(
               children: [
@@ -125,7 +126,7 @@ class PackageProgressBar extends StatelessWidget {
                   formatDate(expectedDate),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF4FC3F7),
+                    color: AppColors.accentBlue,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -138,7 +139,7 @@ class PackageProgressBar extends StatelessWidget {
                     child: const Icon(
                       Icons.info_outline,
                       size: 13,
-                      color: Color(0xFF4FC3F7),
+                      color: AppColors.accentBlue,
                     ),
                   ),
                 ),
@@ -165,14 +166,14 @@ class PackageProgressBar extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.info_outline, size: 16, color: Color(0xFF4FC3F7)),
+                  Icon(Icons.info_outline, size: 16, color: AppColors.accentBlue),
                   SizedBox(width: 8),
                   Text(
                     'Fecha estimada',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
-                      color: Color(0xFF1A1A1A),
+                      color: AppColors.textDark,
                     ),
                   ),
                 ],
@@ -184,7 +185,7 @@ class PackageProgressBar extends StatelessWidget {
                 'Puede variar.',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF666666),
+                  color: AppColors.textGray,
                   height: 1.5,
                 ),
               ),
@@ -209,10 +210,10 @@ class _StepNode extends StatelessWidget {
     final isActive = state == _NodeState.active || state == _NodeState.delayed;
 
     final Color bg = switch (state) {
-      _NodeState.completed => Colors.red,
-      _NodeState.active => Colors.red,
-      _NodeState.delayed => Colors.amber,
-      _NodeState.pending => const Color(0xFFE8E8E8),
+      _NodeState.completed => AppColors.primaryRed,
+      _NodeState.active => AppColors.primaryRed,
+      _NodeState.delayed => AppColors.alertAmber,
+      _NodeState.pending => AppColors.surfaceGray,
     };
 
     final Color iconColor = switch (state) {
@@ -229,7 +230,7 @@ class _StepNode extends StatelessWidget {
         border: Border.all(color: Colors.white, width: 2),
         boxShadow: [
           BoxShadow(
-            color: bg.withOpacity(isActive ? 0.45 : 0.15),
+            color: bg.withValues(alpha: isActive ? 0.45 : 0.15),
             blurRadius: isActive ? 6 : 3,
             offset: const Offset(0, 2),
           ),

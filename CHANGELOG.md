@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.8] - 2026-06-04
+### Added
+- Panel deslizable (`DraggableScrollableSheet`) con efecto snap en `PackagesScreen` para ocultar o revelar contenido del fondo.
+- Sección de anuncios y noticias (`_AdsSection`) de la Teoría C en el fondo del stack principal, con un carrusel de tarjetas promocionales en glassmorphism.
+- Parámetro `controller` en `PackageList` para vincular el scroll de los paquetes con los gestos del panel deslizable, previniendo bloqueos del scroll en listas vacías o de carga.
+
+### Changed
+- Estructura de `PackagesScreen` migrada de `Column` vertical a `Stack` para soportar la superposición del panel deslizable sobre los anuncios.
+- Actualización de `PENDING.md` descartando la Teoría A y completando la Teoría C de anuncios.
+
 ## [0.0.7] - 2026-04-22
 ### Added
 - Complete mode: full-width search bar below header — filters by category, tracking number, or guide

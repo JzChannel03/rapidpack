@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/services/preferences_service.dart';
 import '../../../../../core/widgets/nav_bar.dart';
+import '../../../../../core/widgets/pulsing_widget.dart';
 import '../../data/models/package_model.dart';
 import '../widgets/package_list.dart';
 
@@ -33,6 +34,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
   String _searchQuery = '';
   Set<PackageState> _filterStates = {};
   _SortOption _sortOption = _SortOption.newest;
+  final _sheetController = DraggableScrollableController();
 
   bool get _hasActiveFilter => _filterStates.isNotEmpty;
   bool get _hasActiveSort => _sortOption != _SortOption.newest;
@@ -103,6 +105,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _sheetController.dispose();
     super.dispose();
   }
 
@@ -142,81 +145,150 @@ class _PackagesScreenState extends State<PackagesScreen> {
     final isComplete = _mode == AppMode.complete;
     final isRight = _handedness == Handedness.right;
 
+    // Cálculo dinámico para la separación del navbar de forma equitativa en cualquier pantalla.
+    final screenHeight = MediaQuery.of(context).size.height;
+    // Altura de cabecera: padding superior + paddings Row (12+12) + logo/NavBar (50) + separación visual (24)
+    final headerHeight = topPadding + 12 + 50 + 12 + 16;
+    final maxChildSize = ((screenHeight - headerHeight) / screenHeight).clamp(0.60, 0.95);
+    final minAndInitialSize = 0.55.clamp(0.20, maxChildSize);
+
     return Scaffold(
       body: Container(
         color: Colors.red,
-        child: Column(
+        child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: topPadding + 12,
-                left: 16,
-                right: 16,
-                bottom: 12,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      'assets/images/rapidpack.jpg',
-                      height: 50,
-                      width: 50,
-                      fit: BoxFit.cover,
-                    ),
+            // Contenido de fondo: Cabecera y sección de anuncios
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: topPadding + 12,
+                    left: 16,
+                    right: 16,
+                    bottom: 12,
                   ),
-                  const NavBar(),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset(
+                          'assets/images/rapidpack.jpg',
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const NavBar(),
+                    ],
                   ),
                 ),
-                child: Column(
-                  children: [
-                    if (isSimple)
-                      _SimpleModeTabs(
-                        showAvailableOnly: _showAvailableOnly,
-                        onChanged: (val) =>
-                            setState(() => _showAvailableOnly = val),
-                      ),
-                    if (isComplete)
-                      _SearchBar(
-                        controller: _searchController,
-                        onChanged: (q) => setState(() => _searchQuery = q),
-                      ),
-                    Expanded(
-                      child: isComplete
-                          ? Stack(
-                              children: [
-                                PackageList(
-                                    preloadedPackages: _displayPackages),
-                                _CompleteModeFABs(
-                                  isRight: isRight,
-                                  hasActiveFilter: _hasActiveFilter,
-                                  hasActiveSort: _hasActiveSort,
-                                  onFilter: _showFilterSheet,
-                                  onSort: _showSortSheet,
-                                  onClearFilter: () =>
-                                      setState(() => _filterStates = {}),
-                                  onClearSort: () => setState(
-                                      () => _sortOption = _SortOption.newest),
+                const _AdsSection(),
+              ],
+            ),
+
+            // Panel deslizable con el listado de paquetes
+            DraggableScrollableSheet(
+              controller: _sheetController,
+              initialChildSize: minAndInitialSize,
+              minChildSize: minAndInitialSize,
+              maxChildSize: maxChildSize,
+              snap: true,
+              builder: (context, scrollController) {
+                return Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      // Indicación animada de deslizamiento (reemplaza la manija estática)
+                      Center(
+                        child: AnimatedBuilder(
+                          animation: _sheetController,
+                          builder: (context, _) {
+                            final size = _sheetController.isAttached
+                                ? _sheetController.size
+                                : minAndInitialSize;
+                            // Se desvanece de 1.0 a 0.0 a medida que sube
+                            final fadeEnd = minAndInitialSize + 0.15;
+                            final opacity = ((fadeEnd - size) / (fadeEnd - minAndInitialSize)).clamp(0.0, 1.0);
+                            return Opacity(
+                              opacity: opacity,
+                              child: Visibility(
+                                visible: opacity > 0.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 12, bottom: 4),
+                                  child: PulsingWidget(
+                                    minScale: 0.96,
+                                    maxScale: 1.04,
+                                    duration: const Duration(milliseconds: 1000),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.keyboard_double_arrow_up,
+                                          color: Colors.red.withValues(alpha: 0.7),
+                                          size: 18,
+                                        ),
+                                        if (isSimple) ...[
+                                          const SizedBox(height: 2),
+                                          Text(
+                                            'Desliza para ver todos los paquetes',
+                                            style: TextStyle(
+                                              color: const Color(0xFF1A1A1A).withValues(alpha: 0.6),
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ],
-                            )
-                          : PackageList(preloadedPackages: _displayPackages),
-                    ),
-                  ],
-                ),
-              ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      if (isSimple)
+                        _SimpleModeTabs(
+                          showAvailableOnly: _showAvailableOnly,
+                          onChanged: (val) =>
+                              setState(() => _showAvailableOnly = val),
+                        ),
+                      if (isComplete)
+                        _SearchBar(
+                          controller: _searchController,
+                          onChanged: (q) => setState(() => _searchQuery = q),
+                        ),
+                      Expanded(
+                        child: PackageList(
+                          preloadedPackages: _displayPackages,
+                          controller: scrollController,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
+
+            // Botones flotantes (FABs) para modo completo colocados estáticamente encima del Stack
+            if (isComplete)
+              _CompleteModeFABs(
+                isRight: isRight,
+                hasActiveFilter: _hasActiveFilter,
+                hasActiveSort: _hasActiveSort,
+                onFilter: _showFilterSheet,
+                onSort: _showSortSheet,
+                onClearFilter: () => setState(() => _filterStates = {}),
+                onClearSort: () => setState(
+                    () => _sortOption = _SortOption.newest),
+              ),
           ],
         ),
       ),
@@ -715,6 +787,143 @@ class _Tab extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+// ─── Ads Section ──────────────────────────────────────────────────────────────
+
+class _AdItem {
+  final IconData icon;
+  final String title;
+  final String description;
+
+  const _AdItem({
+    required this.icon,
+    required this.title,
+    required this.description,
+  });
+}
+
+class _AdsSection extends StatelessWidget {
+  const _AdsSection();
+
+  static const List<_AdItem> _ads = [
+    _AdItem(
+      icon: Icons.local_offer,
+      title: 'Tarifa Especial RD\$',
+      description: '¡Solo RD\$150 por libra en vuelos de Miami esta semana!',
+    ),
+    _AdItem(
+      icon: Icons.local_shipping,
+      title: 'Delivery Gratis',
+      description: 'Envío a domicilio sin costo para paquetes de más de 5 Lbs.',
+    ),
+    _AdItem(
+      icon: Icons.receipt,
+      title: 'Sube tu Factura',
+      description: 'Evita retrasos en aduanas subiendo tu factura a tiempo.',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Icon(Icons.campaign, color: Colors.white, size: 20),
+                SizedBox(width: 8),
+                Text(
+                  'Noticias y Promociones',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 110,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              scrollDirection: Axis.horizontal,
+              itemCount: _ads.length,
+              itemBuilder: (context, index) {
+                final ad = _ads[index];
+                return Container(
+                  width: 280,
+                  margin: const EdgeInsets.symmetric(horizontal: 6),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.25),
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          ad.icon,
+                          color: const Color(0xFF4FC3F7),
+                          size: 22,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ad.title,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              ad.description,
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.9),
+                                fontSize: 12,
+                                height: 1.3,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

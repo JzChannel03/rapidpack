@@ -54,6 +54,8 @@ lib/
 ## Filosofía de diseño
 Marca con predominio de blanco y rojo. Sin gradientes ni sombras excesivas. Componentes limpios y minimalistas. El azul claro aparece únicamente como acento puntual (fechas, indicadores). Sin rojo abusivo — se usa como acento, no como fondo dominante en las cards.
 
+- **Diseño del Home/Panel deslizable:** La vista principal de paquetes utiliza un panel deslizable (`DraggableScrollableSheet` con snap). En su estado inicial y mínimo (0.55), deja visible la cabecera y una sección de promociones/noticias (`_AdsSection`) dispuesta en el fondo rojo de la app mediante tarjetas transparentes con estilo glassmorphism. Al deslizarse hacia arriba (hasta 0.95), el panel de paquetes cubre el fondo para optimizar el espacio de lectura.
+
 ## Modelo de datos del paquete (a implementar)
 Campos conocidos de la API de RapidPack:
 - `categoria` — nombre/tipo del paquete (ej. "ACCESORIO DEPORTIVO", "ART PERSONAL Y ACC")

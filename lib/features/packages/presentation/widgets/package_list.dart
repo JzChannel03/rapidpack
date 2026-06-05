@@ -7,11 +7,18 @@ import 'package_card.dart';
 
 class PackageList extends StatelessWidget {
   final List<PackageModel>? preloadedPackages;
+  final ScrollController? controller;
 
-  const PackageList({super.key, this.preloadedPackages});
+  const PackageList({
+    super.key,
+    this.preloadedPackages,
+    this.controller,
+  });
 
   Widget _buildList(List<PackageModel> packages) {
     return SingleChildScrollView(
+      controller: controller,
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
         child: CustomColumn(
@@ -27,10 +34,17 @@ class PackageList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (preloadedPackages != null) {
       return preloadedPackages!.isEmpty
-          ? const Center(
-              child: Text(
-                'No hay paquetes disponibles.',
-                style: TextStyle(color: Color(0xFF999999)),
+          ? SingleChildScrollView(
+              controller: controller,
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: const SizedBox(
+                height: 300,
+                child: Center(
+                  child: Text(
+                    'No hay paquetes disponibles.',
+                    style: TextStyle(color: Color(0xFF999999)),
+                  ),
+                ),
               ),
             )
           : _buildList(preloadedPackages!);
@@ -40,16 +54,30 @@ class PackageList extends StatelessWidget {
       future: PackageService.getMockPackages(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(color: Colors.red),
+          return SingleChildScrollView(
+            controller: controller,
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: const SizedBox(
+              height: 300,
+              child: Center(
+                child: CircularProgressIndicator(color: Colors.red),
+              ),
+            ),
           );
         }
 
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(
-            child: Text(
-              'No hay paquetes disponibles.',
-              style: TextStyle(color: Color(0xFF999999)),
+          return SingleChildScrollView(
+            controller: controller,
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: const SizedBox(
+              height: 300,
+              child: Center(
+                child: Text(
+                  'No hay paquetes disponibles.',
+                  style: TextStyle(color: Color(0xFF999999)),
+                ),
+              ),
             ),
           );
         }

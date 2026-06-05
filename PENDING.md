@@ -75,12 +75,11 @@
 - [ ] Mostrar ícono junto al precio que indique que el monto es resultado de precio por libra × peso
 - [ ] Definir diseño (ícono de calculadora, multiplicación, o tooltip)
 
-### Anuncios informativos — pendiente de análisis
-- [ ] Teorías a evaluar, definir cuál usar o combinar:
-  - **Teoría A — banner entre header y listado:** sección discreta y no molesta justo debajo del header, siempre visible pero sin interrumpir el flujo
-  - **Teoría B — durante la carga:** aprovechar el splash o el tiempo de carga para mostrar anuncios antes de que aparezcan los paquetes
-  - **Teoría C — panel deslizable:** el listado baja y queda visible un área de anuncios debajo (estilo drawer o scroll reveal)
-  - **Teoría D — pantalla de anuncio prioritario:** si hay un anuncio importante, ocupa el espacio de los paquetes al entrar; al aceptar o cerrar, los paquetes aparecen
+### Anuncios informativos — panel deslizable (Teoría C)
+- [x] **Teoría C — panel deslizable:** el listado baja y queda visible un área de anuncios debajo (estilo drawer o scroll reveal) — *¡Implementado usando DraggableScrollableSheet y carrusel de anuncios en glassmorphism!*
+- [x] Descartar **Teoría A — banner entre header y listado** (Descartada por UX intrusivo)
+- [ ] Reemplazar carrusel de texto actual por un carrusel de imágenes adaptadas (banners de anuncios) cuando los assets/API estén disponibles
+- [ ] Evaluar si combinar con **Teoría B — durante la carga** o **Teoría D — anuncio prioritario**
 - [ ] Definir tipos de anuncio: informativos generales vs. alertas importantes
 - [ ] Definir origen de los anuncios: hardcodeados, JSON mock, o futura API
 - [ ] Analizar UX: cuándo mostrar, frecuencia, si se puede volver a ver

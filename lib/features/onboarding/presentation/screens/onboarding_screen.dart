@@ -112,7 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     const SizedBox(height: 32),
 
                     // Pregunta 1
-                    _QuestionLabel(
+                    const _QuestionLabel(
                       number: '1',
                       text: '¿Cómo prefieres ver tus paquetes?',
                     ),
@@ -145,7 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     const SizedBox(height: 28),
 
                     // Pregunta 2
-                    _QuestionLabel(
+                    const _QuestionLabel(
                       number: '2',
                       text: '¿Cómo usas tu teléfono?',
                     ),

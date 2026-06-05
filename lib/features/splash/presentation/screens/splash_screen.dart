@@ -40,7 +40,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _startSequence() async {
     final packages = await PackageService.getMockPackages();
-    final onboardingDone = await PreferencesService.isOnboardingDone();
+    // DEBUG: force onboarding every launch for testing
+    const onboardingDone = false;
+    await PreferencesService.isOnboardingDone();
 
     if (!mounted) return;
 

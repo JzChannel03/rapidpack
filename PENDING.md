@@ -86,6 +86,11 @@
 - [ ] Analizar UX: cuándo mostrar, frecuencia, si se puede volver a ver
 - [ ] El cliente siempre incluye anuncios en sus apps — confirmar formato y contenido típico con él
 
+### Botón de RapidPack (Inicio) — Noticias/Notificaciones (En revisión)
+- [ ] Hacer que el botón/logo de RapidPack en el inicio tenga un comportamiento parpadeante (efecto de pulso/alerta).
+- [ ] Al presionar el botón, deslizar hacia abajo el listado de paquetes para revelar una sección/panel inferior con noticias, notificaciones o ambas.
+
+
 ### Costos adicionales (pendiente de conversación con cliente)
 - [ ] Algunos paquetes pueden tener costos adicionales: seguro, impuestos, otros
 - [ ] Ninguna app actual de RapidPack soporta esto — requiere conversación con el cliente para definir cómo mostrarlo

@@ -31,8 +31,7 @@ class PackageProgressBar extends StatelessWidget {
   })  : arrivalDate = arrivalDate ?? DateTime(2023, 7, 24),
         expectedDate = expectedDate ?? DateTime(2026, 4, 28);
 
-  int get _activeIndex =>
-      currentState.index.clamp(0, _stepIcons.length - 1);
+  int get _activeIndex => currentState.index.clamp(0, _stepIcons.length - 1);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class PackageProgressBar extends StatelessWidget {
       children: [
         Builder(
           builder: (context) {
-            final halfNode = _kNodeSize / 2;
+            const halfNode = _kNodeSize / 2;
             final targetProgress =
                 activeIndex == 0 ? 0.0 : activeIndex / (totalSteps - 1);
 
@@ -55,8 +54,7 @@ class PackageProgressBar extends StatelessWidget {
                 children: [
                   // Barra animada con LinearProgressIndicator
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: halfNode),
+                    padding: EdgeInsets.symmetric(horizontal: halfNode),
                     child: TweenAnimationBuilder<double>(
                       key: ValueKey(activeIndex),
                       tween: Tween(begin: 0.0, end: targetProgress),
@@ -65,11 +63,9 @@ class PackageProgressBar extends StatelessWidget {
                       builder: (_, value, __) => LinearProgressIndicator(
                         value: value,
                         backgroundColor: const Color(0xFFE8E8E8),
-                        valueColor:
-                            const AlwaysStoppedAnimation(Colors.red),
+                        valueColor: const AlwaysStoppedAnimation(Colors.red),
                         minHeight: _kBarHeight,
-                        borderRadius:
-                            BorderRadius.circular(_kBarHeight / 2),
+                        borderRadius: BorderRadius.circular(_kBarHeight / 2),
                       ),
                     ),
                   ),
@@ -96,9 +92,7 @@ class PackageProgressBar extends StatelessWidget {
             );
           },
         ),
-
         const SizedBox(height: 10),
-
         if (hasDelay)
           Padding(
             padding: const EdgeInsets.only(bottom: 6),
@@ -118,14 +112,12 @@ class PackageProgressBar extends StatelessWidget {
               ],
             ),
           ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               formatDate(arrivalDate),
-              style: const TextStyle(
-                  fontSize: 11, color: Color(0xFF999999)),
+              style: const TextStyle(fontSize: 11, color: Color(0xFF999999)),
             ),
             Row(
               children: [
@@ -163,19 +155,17 @@ class PackageProgressBar extends StatelessWidget {
       context: context,
       barrierColor: Colors.black12,
       builder: (_) => Dialog(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         elevation: 4,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        child: const Padding(
+          padding: EdgeInsets.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.info_outline,
-                      size: 16, color: Color(0xFF4FC3F7)),
+                  Icon(Icons.info_outline, size: 16, color: Color(0xFF4FC3F7)),
                   SizedBox(width: 8),
                   Text(
                     'Fecha estimada',
@@ -187,8 +177,8 @@ class PackageProgressBar extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
-              const Text(
+              SizedBox(height: 10),
+              Text(
                 'Calculada según el historial de paquetes similares, '
                 'condiciones actuales y posibles retrasos. '
                 'Puede variar.',
@@ -216,19 +206,18 @@ class _StepNode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isActive =
-        state == _NodeState.active || state == _NodeState.delayed;
+    final isActive = state == _NodeState.active || state == _NodeState.delayed;
 
     final Color bg = switch (state) {
       _NodeState.completed => Colors.red,
-      _NodeState.active    => Colors.red,
-      _NodeState.delayed   => Colors.amber,
-      _NodeState.pending   => const Color(0xFFE8E8E8),
+      _NodeState.active => Colors.red,
+      _NodeState.delayed => Colors.amber,
+      _NodeState.pending => const Color(0xFFE8E8E8),
     };
 
     final Color iconColor = switch (state) {
       _NodeState.pending => const Color(0xFFBBBBBB),
-      _                  => Colors.white,
+      _ => Colors.white,
     };
 
     final node = Container(
